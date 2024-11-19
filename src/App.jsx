@@ -1,21 +1,18 @@
 import { useState } from "react";
 import "./App.css";
+import ContactList from "./components/ContactList";
+import SelectedContact from "./components/SelectedContact";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
+  const [selectedContactId, setSelectedContactId] = useState(null);
+  // console.log(selectedContactId || 'nothing');
   return (
     <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      {selectedContactId ? (
+        <SelectedContact contact={selectedContactId} setSelectedContactId={setSelectedContactId}/>
+      ) : (
+        <ContactList setSelectedContactId={setSelectedContactId} selectedContactId={selectedContactId} />
+      )}
     </>
   );
 }
-
-export default App;
